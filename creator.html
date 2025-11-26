@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Note Creator</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="scripts/script.js"></script>
+</head>
+<script>
+    onloaded = function (notes) {
+        var pixel = 40;
+        var pos = 0;
+
+        console.log("Notes loaded in creator:");
+        console.log(notes);
+
+        var lines = {
+            'c': document.querySelector('.line-c'),
+            'd': document.querySelector('.line-d'),
+            'e': document.querySelector('.line-e'),
+            'f': document.querySelector('.line-f'),
+            'g': document.querySelector('.line-g'),
+            'a': document.querySelector('.line-a'),
+            'b': document.querySelector('.line-b'),
+            'w': document.querySelector('.line-w'),
+        };
+
+        var sheets = {
+            4: '𝅝',       // 온음표 (whole)
+            3: '𝅗𝅥·',      // 점2분음표 (dotted half)
+            2: '𝅗𝅥',       // 2분음표 (half)
+            1.5: '𝅘𝅥·',    // 점4분음표 (dotted quarter)
+            1: '𝅘𝅥',       // 4분음표 (quarter)
+            0.75: '𝅘𝅥𝅮·',   // 점8분음표 (dotted eighth)
+            0.5: '𝅘𝅥𝅮',     // 8분음표 (eighth)
+            0.375: '𝅘𝅥𝅯·',  // 점16분음표 (dotted sixteenth)
+            0.25: '𝅘𝅥𝅯',    // 16분음표 (sixteenth)
+            0.125: '𝅘𝅥𝅰',   // 32분음표 (thirty-second)
+            0.0625: '𝅘𝅥𝅱',  // 64분음표 (sixty-fourth)
+            0.03125: '𝅘𝅥𝅲'  // 128분음표 (one hundred twenty-eighth)
+        }
+
+        for (const n of notes) {
+            console.log(n)
+            if(n.code !== 'rest') {
+                for (const c of n.codes) {
+                    var elm = document.createElement('div');
+                    elm.className = 'note ' + c;
+                    elm.style.width = (pixel * n.beat) + 'px';
+                    elm.style.left = pos + 'px';
+
+                    elm.textContent = sheets[n.beat];
+                    elm.style.fontSize = '20px';
+
+                    lines[c].appendChild(elm);
+                }
+            }
+
+            pos += pixel * n.beat;
+        }
+    };
+</script>
+    <body style="background:black;">
+        <main>
+            <div class="top">
+                <div>
+                    <span>
+                        <label>악보</label>
+                        <input type="file" accept="application/json" onchange="onChangeNoteFile(this.files)">
+                    </span>
+                </div>
+            </div>
+            <div style="margin-top:100px; overflow-y:auto; width:100%;">
+                <div class="notes line-w" style="display:flex; flex-direction:row; flex-wrap:nowrap;">
+                </div>
+                <div class="notes line-b" style="display:flex; flex-direction:row; flex-wrap:nowrap;">
+                </div>
+                <div class="notes line-a" style="display:flex; flex-direction:row; flex-wrap:nowrap;">
+                </div>
+                <div class="notes line-g" style="display:flex; flex-direction:row; flex-wrap:nowrap;">
+                </div>
+                <div class="notes line-f" style="display:flex; flex-direction:row; flex-wrap:nowrap;">
+                </div>
+                <div class="notes line-e" style="display:flex; flex-direction:row; flex-wrap:nowrap;">
+                </div>
+                <div class="notes line-d" style="display:flex; flex-direction:row; flex-wrap:nowrap;">
+                </div>
+                <div class="notes line-c" style="display:flex; flex-direction:row; flex-wrap:nowrap;">
+                </div>
+
+            </div>
+        </main>
+    </body>
+</html>

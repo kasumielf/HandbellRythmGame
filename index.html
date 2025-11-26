@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Note Game</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="scripts/script.js"></script>
+</head>
+    <body style="background:black;">
+        <audio id="audio" src="media/medly.mp3"></audio>
+        <main>
+            <div class="top">
+                <div>
+                    <span>
+                        <label>악보</label>
+                        <input type="file" accept="application/json" onchange="onChangeNoteFile(this.files)">
+                    </span>
+                    <span>
+                        <label>음악</label>
+                        <input type="file" accept="audio/*" onchange="onChangeMusicFile(this.files)">
+                    </span>
+                </div>
+                <span>
+                    <button onclick="onStartButtonClick()">Start</button>
+                    <button onclick="onPauseButtonClick()">Pause</button>
+                    <button onclick="onStopButtonClick()">Stop</button>
+                </span>
+            </div>
+            <div class="bells-wrapper">
+                <div class="bell c" aria-label="c">C</div>
+                <div class="bell d" aria-label="d">D</div>
+                <div class="bell e" aria-label="e">E</div>
+                <div class="bell f" aria-label="f">F</div>
+                <div class="bell g" aria-label="g">G</div>
+                <div class="bell a" aria-label="a">A</div>
+                <div class="bell b" aria-label="b">B</div>
+                <div class="bell w" aria-label="w">C+</div>
+            </div>
+        </main>
+    </body>
+</html>
